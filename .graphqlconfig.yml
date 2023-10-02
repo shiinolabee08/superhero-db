@@ -1,0 +1,15 @@
+projects:
+  Superhero DB API:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        region: ap-southeast-2
+        apiId: jcno5plazvaeba4y3brpapi4uq
+        maxDepth: 2

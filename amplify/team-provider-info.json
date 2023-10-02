@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-superherodbapp-dev-202736-authRole",
+      "UnauthRoleArn": "arn:aws:iam::041217376079:role/amplify-superherodbapp-dev-202736-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::041217376079:role/amplify-superherodbapp-dev-202736-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-superherodbapp-dev-202736-deployment",
+      "UnauthRoleName": "amplify-superherodbapp-dev-202736-unauthRole",
+      "StackName": "amplify-superherodbapp-dev-202736",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:041217376079:stack/amplify-superherodbapp-dev-202736/ed3c0b10-6105-11ee-85a8-0a2156a26932",
+      "AmplifyAppId": "d3sshmnbedrisi"
+    }
+  }
+}
