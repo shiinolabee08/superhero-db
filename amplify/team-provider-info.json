@@ -10,6 +10,11 @@
       "StackName": "amplify-superherodbapp-dev-202736",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:041217376079:stack/amplify-superherodbapp-dev-202736/ed3c0b10-6105-11ee-85a8-0a2156a26932",
       "AmplifyAppId": "d3sshmnbedrisi"
+    },
+    "categories": {
+      "auth": {
+        "superherodbapped0e712f": {}
+      }
     }
   }
 }
