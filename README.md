@@ -43,6 +43,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Test the frontend components using testing libraries like React Testing Library or Enzyme.
 - Ensure proper error handling and validation on both the frontend and backend.
 
+### Bonus Features
+- Implement real-time updates using subscriptions in AWS AppSync.
+- Add image upload functionality for superhero avatars.
+- Implement pagination for the list of superheroes.
+- Add user ratings and reviews for superheroes.
+
 
 
 
