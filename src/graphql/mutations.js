@@ -1,3 +1,6 @@
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
+
 export const createSuperheroes = /* GraphQL */ `
   mutation CreateSuperheroes($input: CreateSuperheroesInput!) {
     createSuperheroes(input: $input) {

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
+
 export const getSuperheroes = /* GraphQL */ `
   query GetSuperheroes($Name: String!) {
     getSuperheroes(Name: $Name) {

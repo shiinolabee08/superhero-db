@@ -7,26 +7,15 @@ export default function LoginLayout({
 }) {
   return (
     <main>
-      <section className="h-screen">
-      <div className="h-full">
-        {/* <!-- Left column container with background--> */}
-        <div
-          className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-          <div
-            className="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-            <Image
-              src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-              className="w-full"
-              alt="Sample image" />
-          </div>
-
-          {/* <!-- Right column container --> */}
-          <div className="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
-            {children}
-          </div>
+      <section className="bg-[#2c66bb] dark:bg-[#2c66bb]">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                  {children}
+              </div>
+            </div>
         </div>
-      </div>
-    </section>
+      </section>
     </main>
   )
 }

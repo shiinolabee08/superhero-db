@@ -1,46 +1,51 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { Auth } from 'aws-amplify';
 
-export default function SignupForm (props: any) {
+const SignupForm = (props: any) => {
 
-  const initiateState = () => {
-    return {
-      username : '',
-      password : '',
-      email: '',
-      address: '',
-    }
+  const initialState =  {
+    username : '',
+    password : '',
+    email: '',
+    address: '',
   }
 
-  const [newUser, setNewUser] = useState(initiateState() as any);
+  const [newUser, setNewUser] = useState(initialState as any);
   const usernameRef = useRef(null as any);
 
   useEffect(() => {
     usernameRef.current?.focus();
   }, [])
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async(evt: any) => {
+    evt.preventDefault();
 
-    props.signup(newUser)
-      .then((response: any) => {
-
+    try {
+      const user = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          address,
+        }
       });
+
+      console.log('Sign-up successful', user);
+    } catch (error) {
+      console.error('Error signing up: ', error);
+    }
   }
 
   const handleResetForm = () => {
-    setNewUser(initiateState());
+    setNewUser(initialState);
   }
 
 
   return (
-    <form onSubmit={handleSubmit}>``
-      {/* <!--Log in section--> */}
-      <div
-        className="flex flex-row items-center justify-center lg:justify-start">
-        <p className="mb-0 mr-4 text-lg">Sign in</p>
-      </div>
-
+    <form onSubmit={handleSubmit}>
       {/* <!-- username input --> */}
       <div className="relative mb-6">
         <input
@@ -105,3 +110,5 @@ export default function SignupForm (props: any) {
   )
 
 }
+
+export default SignupForm;
