@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "superherodbapped0e712f": {}
+      },
+      "hosting": {
+        "S3AndCloudFront": {}
       }
     }
   }

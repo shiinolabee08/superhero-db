@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Auth } from 'aws-amplify';
+import { useRouter } from 'next/navigation';
+import { CognitoErrorExceptionEnum } from '@/app/enums/cognito-error-exception.enum';
 
 const LoginForm = () => {
 
@@ -10,6 +12,8 @@ const LoginForm = () => {
     username: '',
     password: '',
   }
+
+  const router = useRouter();
 
   const [formData, setFormData] = useState(initialState);
   const [errorMsg, setErrorMsg] = useState('');
@@ -20,16 +24,26 @@ const LoginForm = () => {
     usernameRef.current?.focus();
   }, []);
 
+  /* Handlers */
   const handleSubmit = async(evt: any) => {
     evt.preventDefault();
 
     try {
       await Auth.signIn(formData.username, formData.password);
-      // Redirect or handle successful login
+
+      handleRedirectSuccess();
+      handleResetForm();
+
     } catch (error: any) {
       console.error('Login failed', error);
       setErrorMsg(error.toString());
-      // Handle login failure
+
+      if(error.name == CognitoErrorExceptionEnum.USER_NOT_CONFIRMED) {
+        const queryParams = { username: formData.username };
+        const queryString = new URLSearchParams(queryParams).toString();
+
+        router.push(`/verify-email?username=${queryString}`);
+      }
     }
   }
 
@@ -44,6 +58,10 @@ const LoginForm = () => {
 
   const handleResetForm = () => {
     setFormData(initialState);
+  }
+
+  const handleRedirectSuccess = () => {
+    router.push('/');
   }
 
   return (
@@ -63,7 +81,7 @@ const LoginForm = () => {
           value={formData.username}
           onChange={handleChange}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="name@company.com"
+          placeholder="johndoe08"
         />
       </div>
       <div>
@@ -84,8 +102,7 @@ const LoginForm = () => {
       <div className="block my-4">
         { errorMsg &&
           <span
-            className="text-red-500 text-base mt-4"
-            v-if="errorMsg.length">
+            className="text-red-500 text-base mt-4">
             {errorMsg}
           </span> }
       </div>
@@ -99,7 +116,7 @@ const LoginForm = () => {
         Dont have an account yet?
         <Link
           href="/signup"
-          className="font-medium text-primary-600 hover:underline dark:text-primary-500">
+          className="font-medium text-primary-600 hover:underline dark:text-primary-500 ml-2">
             Sign up
         </Link>
       </p>

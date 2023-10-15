@@ -1,10 +1,19 @@
-import Image from 'next/image';
+'use client';
 
-export default function LoginLayout({
+import { useEffect } from 'react';
+import awsconfig from '../../aws-exports';
+import { Amplify } from 'aws-amplify';
+
+function AuthLayout({
   children,
 } : {
   children: React.ReactNode
 }) {
+
+  useEffect(() => {
+    Amplify.configure(awsconfig);
+  }, []);
+
   return (
     <main>
       <section className="bg-[#2c66bb] dark:bg-[#2c66bb]">
@@ -19,3 +28,5 @@ export default function LoginLayout({
     </main>
   )
 }
+
+export default AuthLayout;

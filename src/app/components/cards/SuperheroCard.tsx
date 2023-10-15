@@ -10,9 +10,9 @@ const SuperheroCard = ({ superhero }: { superhero: Superhero }) => {
         <h3 className="text-md font-semibold">{superhero.powers}</h3>
         <p className="text-gray-600">{superhero.backstory}</p>
         <div className="mt-4">
-          <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <a href={`/edit/${superhero.name}`} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Edit Details
-          </button>
+          </a>
         </div>
       </div>
     </div>

@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import SuperheroList from './components/list/SuperheroList';
 import { Superhero } from './models/Superhero';
 import Pagination from './components/pagination/Pagination';
 import SuperheroResolvers from '@/graphql/resolvers';
-import { withAuth } from '../../authMiddleware';
+import awsconfig from '../aws-exports';
+import { Amplify } from 'aws-amplify';
 
 const ITEMS_PER_PAGE = 10;
 
-function Home() {
+function HomePage() {
 
   const [superheroes, setSuperheroes] = useState<Superhero[]>([]);
   const [currentToken, setToken] = useState(null);
@@ -20,6 +21,10 @@ function Home() {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+
+  useEffect(() => {
+    Amplify.configure(awsconfig);
+  }, []);
 
   useEffect(() => {
     async function getListSuperheroes(nextToken = null) {
@@ -33,21 +38,19 @@ function Home() {
     }
   }, [currentPage]);
 
-  if(!superheroes) {
-    return <div>Loading superheroes...</div>
-  }
-
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-semibold mb-4">Superheroes</h1>
-      <SuperheroList superheroes={superheroes} />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onChange={handlePageChange}
-      />
+      <Suspense fallback={<p>Loading superheroes...</p>}>
+        <SuperheroList superheroes={superheroes} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onChange={handlePageChange}
+        />
+      </Suspense>
     </div>
   )
 }
 
-export default withAuth(Home);
+export default HomePage;
